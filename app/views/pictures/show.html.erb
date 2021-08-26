@@ -5,8 +5,8 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @picture.image %>
+  <%= image_tag @picture.image.url if @picture.image.url.present? %>
 </p>
 
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
-<%= link_to 'Back', pictures_path %>
+<%= link_to '編集', edit_picture_path(@picture) %> |
+<%= link_to '投稿一覧', pictures_path %>
