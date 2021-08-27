@@ -26,6 +26,7 @@ class PicturesController < ApplicationController
     else
       respond_to do |format|
         if @picture.save
+          PictureMailer.picture_mail(@picture).deliver
           format.html { redirect_to @picture, notice: "投稿しました" }
           format.json { render :show, status: :created, location: @picture }
         else
@@ -67,6 +68,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:content, :image, :image_cache)
+      params.require(:picture).permit(:content, :image, :image_cache, :email)
     end
 end
