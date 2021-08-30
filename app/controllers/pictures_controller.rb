@@ -6,6 +6,7 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def new
@@ -56,18 +57,20 @@ class PicturesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def confirm
     @picture = current_user.pictures.build(picture_params)
     render :new if @picture.invalid?
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
 
-    def picture_params
-      params.require(:picture).permit(:content, :image, :image_cache, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_picture
+    @picture = Picture.find(params[:id])
+  end
+
+  def picture_params
+    params.require(:picture).permit(:content, :image, :image_cache, :email)
+  end
 end

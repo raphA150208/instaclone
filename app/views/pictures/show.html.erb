@@ -8,5 +8,15 @@
   <%= image_tag @picture.image.url if @picture.image.url.present? %>
 </p>
 
-<%= link_to '編集', edit_picture_path(@picture) %> |
-<%= link_to '投稿一覧', pictures_path %>
+<% unless @picture.user_id == current_user.id %>
+  <% if @favorite.present? %>
+    <%= link_to "お気に入り解除", favorite_path(id: @favorite.id), method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "お気に入り", favorites_path(picture_id: @picture.id), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+<% if @picture.user == current_user %>
+  <%= link_to "編集", edit_picture_path(@picture) %>
+  <%= link_to "削除", picture_path(@picture.id), method: :delete, data: { confirm: "本当に削除しますか?" } %>
+<% end %>
+<%= link_to "投稿一覧", pictures_path %>
