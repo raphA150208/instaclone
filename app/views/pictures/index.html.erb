@@ -1,4 +1,5 @@
 <h1>投稿一覧</h1>
+<%= link_to "新規投稿", new_picture_path %>
 
 <table>
   <thead>
@@ -16,9 +17,9 @@
         <td><%= picture.user.name %></td>
         <td><%= picture.content %></td>
         <td><%= image_tag picture.image.url if picture.image.url.present? %></td>
-        <td><%= link_to '詳細', picture %></td>
-        <td><%= link_to '編集', edit_picture_path(picture) %></td>
-        <td><%= link_to '削除', picture, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+        <td><%= link_to "詳細", picture %></td>
+        <td><%= link_to "編集", edit_picture_path(picture) %></td>
+        <td><%= link_to "削除", picture, method: :delete, data: { confirm: "本当に削除しますか?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +27,3 @@
 
 <br>
 
-<%= link_to '新規投稿', new_picture_path %>
