@@ -34,10 +34,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @user = User.find
-  end
-
   private
 
   def user_params
@@ -45,7 +41,8 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    unless current_user.id == @user.id
+    unless current_user.id == (params[:id]).to_i
+      flash[:notice] = "変更できません"
       redirect_to user_path
     end
   end
