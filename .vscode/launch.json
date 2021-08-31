@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "instaclone",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${workspaceRoot}/app/controllers/favorites_controller.rb",
+      "useBundler": true
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
+  before_action :post_user, only: %i[ show edit update destroy ]
 
   def index
     @pictures = Picture.all
@@ -72,5 +73,12 @@ class PicturesController < ApplicationController
 
   def picture_params
     params.require(:picture).permit(:content, :image, :image_cache, :email)
+  end
+
+  def post_user
+    unless current_user.id == @picture.user.id
+      flash[:notice] = "変更できません"
+      redirect_to pictures_path
+    end
   end
 end
